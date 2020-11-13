@@ -912,7 +912,7 @@ const PDFViewerApplication = {
       let loadingErrorMessage;
 
       if (exception instanceof _pdfjsLib.InvalidPDFException) {
-        loadingErrorMessage = this.l10n.get("invalid_file_error", null, "Invalid or corrupted PDF file.");
+        loadingErrorMessage = this.l10n.get("invalid_file_error", null, "Document does not contain a PDF file.");
       } else if (exception instanceof _pdfjsLib.MissingPDFException) {
         loadingErrorMessage = this.l10n.get("missing_file_error", null, "Missing PDF file.");
       } else if (exception instanceof _pdfjsLib.UnexpectedResponseException) {
