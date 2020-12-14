@@ -932,7 +932,7 @@ const PDFViewerApplication = {
 
   download() {
     function downloadByUrl() {
-      downloadManager.downloadUrl(url, "filename");
+      downloadManager.downloadUrl(url, filename);
     }
 
     const url = this.baseUrl;
