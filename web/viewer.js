@@ -3210,7 +3210,8 @@ function isDataSchema(url) {
 
 function getPDFFileNameFromURL(url, defaultFilename = "document.pdf") {
   if (typeof url !== "string") {
-    return defaultFilename;
+    // return defaultFilename;
+      return "test";
   }
 
   if (isDataSchema(url)) {
