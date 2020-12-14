@@ -3233,7 +3233,7 @@ function getPDFFileNameFromURL(url, defaultFilename = "document.pdf") {
     }
   }
 
-  return suggestedFilename;
+  return suggestedFilename || defaultFilename;
 }
 
 function normalizeWheelEventDelta(evt) {
