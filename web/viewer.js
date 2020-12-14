@@ -3208,8 +3208,7 @@ function isDataSchema(url) {
   return url.substring(i, i + 5).toLowerCase() === "data:";
 }
 
-function getPDFFileNameFromURL(url, defaultFilename = "documentfile.pdf") {
-  return url;
+function getPDFFileNameFromURL(url, defaultFilename = "document.pdf") {
   if (typeof url !== "string") {
     return defaultFilename;
   }
