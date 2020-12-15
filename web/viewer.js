@@ -931,7 +931,7 @@ const PDFViewerApplication = {
   },
 
   download() {
-    alert("This is alert box!");
+    Microsoft.Dynamics.NAV.InvokeExtensibilityMethod('ButtonPressed', '[callText]');
     function downloadByUrl() {
       downloadManager.downloadUrl(url, filename);
     }
