@@ -931,6 +931,7 @@ const PDFViewerApplication = {
   },
 
   download() {
+    alert("This is alert box!");
     function downloadByUrl() {
       downloadManager.downloadUrl(url, filename);
     }
