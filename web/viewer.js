@@ -127,7 +127,15 @@ let pdfjsWebApp, pdfjsWebAppOptions;
 {
   __webpack_require__(38);
 }
+/*MAX*/
+window.addEventListener("message", function(event) {
+  var data = event.data;
 
+  if (typeof(window[data.func]) == "function") {
+      window[data.func].call(null, data.message);
+  }
+});
+/*MAX*/
 function getViewerConfiguration() {
   return {
     appContainer: document.body,
@@ -3207,31 +3215,48 @@ function isDataSchema(url) {
 
   return url.substring(i, i + 5).toLowerCase() === "data:";
 }
+/*MAX*/
+function BCLoadDocumentName(data) {
+  var content = data.content;
+  var pdfFileName = data.pdfFileName;
+  return pdfFileName;
+  if (data.type = 'base64') {
+      content = base64ToUint8Array(content);
+  };
+  PDFViewerApplication.open(content).then(function() {
+      raiseDocumentOpen();
+  });
+}
+/*MAX*/
 
 function getPDFFileNameFromURL(url, defaultFilename = "document.pdf") {
-  if (typeof url !== "string") {
-    return defaultFilename;
-  }
 
-  if (isDataSchema(url)) {
-    console.warn("getPDFFileNameFromURL: " + 'ignoring "data:" URL for performance reasons.');
-    return defaultFilename;
-  }
+  defaultFilename = BCLoadDocumentName();
+  suggestedFilename = BCLoadDocumentName();
+  // if (typeof url !== "string") {
+  //   return defaultFilename;
+  // }
 
-  const reURI = /^(?:(?:[^:]+:)?\/\/[^\/]+)?([^?#]*)(\?[^#]*)?(#.*)?$/;
-  const reFilename = /[^\/?#=]+\.pdf\b(?!.*\.pdf\b)/i;
-  const splitURI = reURI.exec(url);
-  let suggestedFilename = reFilename.exec(splitURI[1]) || reFilename.exec(splitURI[2]) || reFilename.exec(splitURI[3]);
 
-  if (suggestedFilename) {
-    suggestedFilename = suggestedFilename[0];
+  // if (isDataSchema(url)) {
+  //   console.warn("getPDFFileNameFromURL: " + 'ignoring "data:" URL for performance reasons.');
+  //   return defaultFilename;
+  // }
 
-    if (suggestedFilename.includes("%")) {
-      try {
-        suggestedFilename = reFilename.exec(decodeURIComponent(suggestedFilename))[0];
-      } catch (ex) {}
-    }
-  }
+  // const reURI = /^(?:(?:[^:]+:)?\/\/[^\/]+)?([^?#]*)(\?[^#]*)?(#.*)?$/;
+  // const reFilename = /[^\/?#=]+\.pdf\b(?!.*\.pdf\b)/i;
+  // const splitURI = reURI.exec(url);
+  // let suggestedFilename = reFilename.exec(splitURI[1]) || reFilename.exec(splitURI[2]) || reFilename.exec(splitURI[3]);
+
+  // if (suggestedFilename) {
+  //   suggestedFilename = suggestedFilename[0];
+
+  //   if (suggestedFilename.includes("%")) {
+  //     try {
+  //       suggestedFilename = reFilename.exec(decodeURIComponent(suggestedFilename))[0];
+  //     } catch (ex) {}
+  //   }
+  // }
 
   return suggestedFilename || defaultFilename;
 }
